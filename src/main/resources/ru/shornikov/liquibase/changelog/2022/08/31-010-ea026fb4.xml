@@ -28,49 +28,18 @@
             <column name="ID" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TEACHER"/>
             </column>
-            <column name="USER" type="UUID">
-                <constraints nullable="false"/>
-            </column>
             <column name="FIRST_NAME" type="VARCHAR(255)"/>
             <column name="LAST_NAME" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
     <changeSet id="4" author="Shornikov">
-        <createTable tableName="USER_">
-            <column name="ID" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USER_"/>
-            </column>
-            <column name="VERSION" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="USERNAME" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="PASSWORD" type="VARCHAR(255)"/>
-            <column name="FIRST_NAME" type="VARCHAR(255)"/>
-            <column name="LAST_NAME" type="VARCHAR(255)"/>
-            <column name="EMAIL" type="VARCHAR(255)"/>
-            <column name="ACTIVE" type="BOOLEAN"/>
-            <column name="TIME_ZONE_ID" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet id="5" author="Shornikov">
-        <createIndex indexName="IDX_USER__ON_USERNAME" tableName="USER_" unique="true">
-            <column name="USERNAME"/>
-        </createIndex>
-    </changeSet>
-    <changeSet id="6" author="Shornikov">
         <addForeignKeyConstraint baseColumnNames="SHEET_ID" baseTableName="JSDD_EXAM_SHEET_TEACHER_LINK"
                                  constraintName="FK_JSDEXASHETEA_ON_SHEET" referencedColumnNames="ID"
                                  referencedTableName="SHEET"/>
     </changeSet>
-    <changeSet id="7" author="Shornikov">
+    <changeSet id="5" author="Shornikov">
         <addForeignKeyConstraint baseColumnNames="TEACHER_ID" baseTableName="JSDD_EXAM_SHEET_TEACHER_LINK"
                                  constraintName="FK_JSDEXASHETEA_ON_TEACHER" referencedColumnNames="ID"
                                  referencedTableName="TEACHER"/>
-    </changeSet>
-    <changeSet id="8" author="Shornikov">
-        <addForeignKeyConstraint baseColumnNames="USER" baseTableName="TEACHER" constraintName="FK_TEACHER_ON_USER"
-                                 referencedColumnNames="ID" referencedTableName="USER_"/>
     </changeSet>
 </databaseChangeLog>

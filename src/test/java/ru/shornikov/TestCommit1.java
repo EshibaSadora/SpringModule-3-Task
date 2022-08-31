@@ -59,4 +59,12 @@ public class TestCommit1 {
         });
     }
 
+    @Test
+    void CreateUser(){
+        systemAuthenticator.runWithSystem(() -> {
+            Object o  = userRepository.getAnonymousUser().getAuthorities();
+
+        });
+    }
+
 }

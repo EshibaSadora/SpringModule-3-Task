@@ -7,7 +7,10 @@
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
     <changeSet id="1" author="Shornikov">
         <addColumn tableName="SHEET">
-            <column name="Number_" type="INT"/>
+            <column name="sheetnumber" type="INT"/>
         </addColumn>
+    </changeSet>
+    <changeSet id="2" author="Shornikov">
+        <dropColumn columnName="NUMBER_" tableName="SHEET"/>
     </changeSet>
 </databaseChangeLog>

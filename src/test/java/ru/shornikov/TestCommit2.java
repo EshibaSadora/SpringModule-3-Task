@@ -37,6 +37,7 @@ public class TestCommit2 {
         systemAuthenticator.runWithSystem(() -> {
             Sheet sheet = sheetRepository.create();
             sheet.setName("Тест");
+            sheet.setSheetnumber(1);
             List<Teacher> teachers = new ArrayList<>();
             Teacher t1 = teacherRepository.create();
             t1.setFirstName("Иван");
@@ -60,3 +61,4 @@ public class TestCommit2 {
 
     }
 }
+
