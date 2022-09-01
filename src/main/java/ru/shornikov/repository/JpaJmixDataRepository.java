@@ -3,6 +3,7 @@ package ru.shornikov.repository;
 import io.jmix.core.FetchPlan;
 import io.jmix.core.repository.JmixDataRepository;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import javax.annotation.Nullable;

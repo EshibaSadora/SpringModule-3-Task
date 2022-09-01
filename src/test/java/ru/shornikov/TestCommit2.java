@@ -39,10 +39,10 @@ public class TestCommit2 {
             sheet.setName("Тест");
             sheet.setSheetnumber(1);
             List<Teacher> teachers = new ArrayList<>();
-            Teacher t1 = teacherRepository.create();
+            Teacher t1 = (Teacher) teacherRepository.create();
             t1.setFirstName("Иван");
             t1.setLastName("Иванов");
-            t1 = teacherRepository.save(t1);
+            t1 = (Teacher) teacherRepository.save(t1);
 
             //t1.setUser(userRepository.loadUserByUsername("admin"));
             teachers.add(t1);
