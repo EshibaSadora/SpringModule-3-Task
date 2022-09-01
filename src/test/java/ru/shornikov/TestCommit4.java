@@ -54,11 +54,20 @@ public class TestCommit4 {
 
     }
 
+
+    @Test
+    void RemoveAllSheet(){
+        systemAuthenticator.runWithSystem(() -> {
+            sheetAsignRepository.findAll().forEach(sheetAsign -> {
+                sheetAsignRepository.delete(sheetAsign);
+            });
+        });
+    }
+
     @Test
     void GetAllSheet(){
         systemAuthenticator.runWithSystem(() -> {
-            //List<SheetAsign> assigns = sheetAsignRepository.findAll();
-            //Teacher teacher = assigns.get(0).getTeacher();
+            List<SheetAsign> assigns = sheetAsignRepository.findAll();
         });
     }
 

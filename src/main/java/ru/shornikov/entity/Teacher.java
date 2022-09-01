@@ -45,4 +45,8 @@ public class Teacher {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String GetFullName(){
+        return  firstName+" "+lastName;
+    }
 }

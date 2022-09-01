@@ -1,6 +1,7 @@
 package ru.shornikov.repository;
 
 import io.jmix.core.repository.Query;
+import org.eclipse.persistence.annotations.DeleteAll;
 import org.springframework.data.repository.query.Param;
 import ru.shornikov.entity.Sheet;
 import ru.shornikov.entity.SheetAsign;
@@ -22,6 +23,7 @@ public interface SheetAsignRepository extends JpaJmixDataRepository<SheetAsign, 
 
     @Query("select s from SheetAsign s where s.createdate > :datestart and s.createdate < :dateend")
     List<SheetAsign> getSheetByDeltaDay(@Param("datestart") Date datestart, @Param("dateend") Date dateend);
+
 
 }
 

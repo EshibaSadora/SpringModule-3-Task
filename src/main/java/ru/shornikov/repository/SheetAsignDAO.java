@@ -1,19 +1,23 @@
 package ru.shornikov.repository;
 
 import io.jmix.core.DataManager;
+import io.jmix.core.repository.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.jmx.JmxException;
 import org.springframework.stereotype.Component;
 import ru.shornikov.entity.Sheet;
 import ru.shornikov.entity.SheetAsign;
+import ru.shornikov.entity.SheetAssignetInfo;
 import ru.shornikov.entity.Teacher;
 import ru.shornikov.security.DatabaseUserRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -54,13 +58,16 @@ public class SheetAsignDAO {
         } else {
 
 
-            SheetAsign sheet_asign = new SheetAsign();
-            sheet_asign.setSheet(sheet);
-            sheet_asign.setTeacher(teacher);
+            SheetAsign sheetAsign = sheetAsignRepository.create();
+            sheetAsign.setSheet(sheet);
+            sheetAsign.setTeacher(teacher);
+
+            //TODO CreateDate автоматически не проставиляется!
+            //sheetAsign.setCreatedate(new Date());
 
             //return  mongoTemplate.insert(sheet_asign);
 
-            return sheetAsignRepository.save(sheet_asign);
+            return sheetAsignRepository.save(sheetAsign);
         }
     }
 
@@ -85,6 +92,30 @@ public class SheetAsignDAO {
         }
 
     }
+
+    @Autowired
+    private DataManager dataManager;
+
+
+    /**
+     *Получение статистики, подписанных ведомостей
+     */
+    public List<SheetAssignetInfo> GetAssignetAheets(){
+        List<SheetAssignetInfo> sheetlist = new ArrayList<>();
+
+        for(SheetAsign asign : sheetAsignRepository.findAll()){
+            SheetAssignetInfo info = new SheetAssignetInfo();
+            info.setSheetNumber(asign.getSheet().getSheetnumber()); //TODO Не понятно как сделать nvl для пустого значения SheetNumber (asign.getSheet().getSheetnumber()) Внутри get функции говнорешение
+            info.setTeacher(asign.getTeacher().GetFullName());
+
+            info.setDateAssign(asign.GetCreatedDateAsString());
+            sheetlist.add(info);
+        }
+
+        return sheetlist;
+    }
+
+
 
 
 

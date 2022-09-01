@@ -2,7 +2,9 @@ package ru.shornikov.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.CreatedDate;
+import ru.shornikov.ShornikovApplication;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -26,6 +28,7 @@ public class SheetAsign {
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @Column
     Date createdate;
 
     public Integer getId() {
@@ -52,8 +55,26 @@ public class SheetAsign {
         this.teacher = teacher;
     }
 
+
     public Date getCreatedate() {
-        return createdate;
+        try {
+            if(!createdate.equals(null))
+            return createdate;
+            else return new Date();
+        }catch (Exception e){
+            LoggerFactory.getLogger(SheetAsign.class).warn("Не удалось вернуть корректную дату, возможно значение в бд null! SheetAsignId:" + id);
+            return new Date();
+        }
+
+    }
+
+    public String GetCreatedDateAsString(){
+        try {
+            return createdate.toString();
+        }catch (Exception e){
+            LoggerFactory.getLogger(SheetAsign.class).warn("Не удалось вернуть корректную дату, возможно значение в бд null! SheetAsignId:" + id);
+            return "Не указана";
+        }
     }
 
     public void setCreatedate(Date createdate) {
